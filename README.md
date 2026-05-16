@@ -38,22 +38,28 @@ The automated setup uses the following configuration for DeepSeek:
   "agents": {
     "defaults": {
       "workspace": "/root/.picoclaw/workspace",
-      "model": "deepseek-chat"
+      "model": "deepseek-pro"
     }
   },
   "model_list": [
     {
-      "model_name": "deepseek-chat",
+      "model_name": "deepseek-pro",
       "model": "deepseek/deepseek-chat", 
       "api_base": "https://api.deepseek.com/v1",
-      "api_key": "YOUR_DEEPSEEK_KEY"
+      "api_key": "sk-f338...aec0a"
+    },
+    {
+      "model_name": "deepseek-flash",
+      "model": "deepseek/deepseek-chat", 
+      "api_base": "https://api.deepseek.com/v1",
+      "api_key": "sk-f338...aec0a"
     }
   ],
   "channels": {
     "telegram": {
       "enabled": true,
-      "token": "YOUR_TELEGRAM_TOKEN",
-      "allow_from": [YOUR_TELEGRAM_ID]
+      "token": "8752393344:AAGwiROtQpPbSHiYvMcvZAWfZbcnRM9VKQM",
+      "allow_from": [5367731807]
     }
   }
 }

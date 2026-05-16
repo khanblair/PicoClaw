@@ -39,22 +39,26 @@ mkdir -p ~/.picoclaw
 
 # DeepSeek Integration
 API_KEY="sk-f338c08b675a4bb691d4103d931aec0a"
-
-echo "Please provide your Telegram bot details to complete the setup."
-read -p "Enter your Telegram Bot Token: " TELEGRAM_TOKEN
-read -p "Enter your Telegram User ID (numeric): " TELEGRAM_ID
+TELEGRAM_TOKEN="8752393344:AAGwiROtQpPbSHiYvMcvZAWfZbcnRM9VKQM"
+TELEGRAM_ID="5367731807"
 
 cat <<EOF > ~/.picoclaw/config.json
 {
   "agents": {
     "defaults": {
       "workspace": "/root/.picoclaw/workspace",
-      "model": "deepseek-chat"
+      "model": "deepseek-pro"
     }
   },
   "model_list": [
     {
-      "model_name": "deepseek-chat",
+      "model_name": "deepseek-pro",
+      "model": "deepseek/deepseek-chat", 
+      "api_base": "https://api.deepseek.com/v1",
+      "api_key": "$API_KEY"
+    },
+    {
+      "model_name": "deepseek-flash",
       "model": "deepseek/deepseek-chat", 
       "api_base": "https://api.deepseek.com/v1",
       "api_key": "$API_KEY"
