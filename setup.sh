@@ -3,7 +3,7 @@
 # 1. Handle Piped Execution (curl | bash)
 # If the script is being piped, save it to a temporary file first
 if [[ "$0" == "bash" || "$0" == "sh" || "$0" == "/bin/bash" || "$0" == "/bin/sh" || "$0" == "-bash" ]]; then
-    TMP_SCRIPT="/tmp/picoclaw_setup.sh"
+    TMP_SCRIPT="$HOME/picoclaw_setup.sh"
     cat > "$TMP_SCRIPT"
     exec bash "$TMP_SCRIPT" "$@"
 fi
