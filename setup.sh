@@ -15,13 +15,9 @@ if [ ! -f "/etc/debian_version" ]; then
         proot-distro install ubuntu
     fi
     
-    # Copy the script itself into the Ubuntu environment
-    UBUNTU_ROOT=$(proot-distro path ubuntu)
-    cat "$0" > "$UBUNTU_ROOT/root/setup_pico.sh"
-    chmod +x "$UBUNTU_ROOT/root/setup_pico.sh"
-    
     echo "--- Transitioning to Ubuntu Phase ---"
-    proot-distro login ubuntu -- /root/setup_pico.sh
+    # Execute this script inside Ubuntu
+    proot-distro login ubuntu -- bash -c "$(cat $0)"
     exit 0
 fi
 
@@ -56,13 +52,13 @@ cat <<EOF > ~/.picoclaw/config.json
   },
   "model_list": [
     {
-      "model_name": "pro",
+      "model_name": "deepseek-v4-pro",
       "model": "deepseek-v4-pro", 
       "api_base": "https://api.deepseek.com/v1",
       "api_key": "$API_KEY"
     },
     {
-      "model_name": "flash",
+      "model_name": "deepseek-v4-flash",
       "model": "deepseek-v4-flash", 
       "api_base": "https://api.deepseek.com/v1",
       "api_key": "$API_KEY"
