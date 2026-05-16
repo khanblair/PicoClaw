@@ -458,7 +458,7 @@
           <span class="tag">arm64</span>
           <span class="tag">proot-distro</span>
           <span class="tag">telegram bot</span>
-          <span class="tag">ollama</span>
+          <span class="tag">deepseek</span>
           <span class="tag">v0.2.2</span>
         </div>
       </div>
@@ -483,6 +483,25 @@
         <div class="step-header">
           <div class="step-number">01</div>
           <div class="step-info">
+            <h3>One-Click Installation</h3>
+            <p>The fastest way to get started. This script automates everything from environment setup to DeepSeek configuration.</p>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="code-block">
+            <div class="code-label"><span>bash — termux</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+            <pre><code>curl -sL https://raw.githubusercontent.com/khanblair/PicoClaw/feature/one-click-setup-deepseek/setup.sh | bash</code></pre>
+          </div>
+          <div class="note">
+            🚀 This is the recommended method for most users. It handles the Termux -> Ubuntu transition automatically.
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <div class="step-number">02</div>
+          <div class="step-info">
             <h3>Update Packages &amp; Install Ubuntu</h3>
             <p>Bootstrap your Termux environment with a full Ubuntu container via proot-distro.</p>
           </div>
@@ -500,7 +519,7 @@ proot-distro login ubuntu</code></pre>
 
       <div class="step">
         <div class="step-header">
-          <div class="step-number">02</div>
+          <div class="step-number">03</div>
           <div class="step-info">
             <h3>Prepare the Ubuntu Environment</h3>
             <p>Once inside the Ubuntu shell (you'll see <code style="color:var(--green);font-family:'Space Mono',monospace;font-size:12px">root@localhost</code>), install the essential toolchain.</p>
@@ -517,7 +536,7 @@ apt install wget tar nano ca-certificates curl -y</code></pre>
 
       <div class="step">
         <div class="step-header">
-          <div class="step-number">03</div>
+          <div class="step-number">04</div>
           <div class="step-info">
             <h3>Download &amp; Setup PicoClaw</h3>
             <p>Fetch the ARM64 release binary, extract it, and move it into your system path.</p>
@@ -537,7 +556,7 @@ mv picoclaw /usr/local/bin/</code></pre>
 
       <div class="step">
         <div class="step-header">
-          <div class="step-number">04</div>
+          <div class="step-number">05</div>
           <div class="step-info">
             <h3>Create the Config Directory</h3>
             <p>Set up the PicoClaw configuration directory and open the config file in the editor.</p>
@@ -554,10 +573,10 @@ nano ~/.picoclaw/config.json</code></pre>
 
       <div class="step">
         <div class="step-header">
-          <div class="step-number">05</div>
+          <div class="step-number">06</div>
           <div class="step-info">
             <h3>Paste &amp; Configure config.json</h3>
-            <p>Copy the template below. Replace the placeholder values with your Telegram Bot Token and User ID. Swap any Ollama-compatible model in the <code style="color:var(--green);font-family:'Space Mono',monospace;font-size:12px">model</code> field.</p>
+            <p>Copy the template below. Replace the placeholder values with your Telegram Bot Token and User ID. The setup is pre-integrated with DeepSeek.</p>
           </div>
         </div>
         <div class="step-body">
@@ -567,15 +586,15 @@ nano ~/.picoclaw/config.json</code></pre>
   <span class="code-key">"agents"</span>: {
     <span class="code-key">"defaults"</span>: {
       <span class="code-key">"workspace"</span>: <span class="code-str">"/root/.picoclaw/workspace"</span>,
-      <span class="code-key">"model"</span>: <span class="code-str">"my-assistant"</span>
+      <span class="code-key">"model"</span>: <span class="code-str">"deepseek-chat"</span>
     }
   },
   <span class="code-key">"model_list"</span>: [
     {
-      <span class="code-key">"model_name"</span>: <span class="code-str">"my-assistant"</span>,
-      <span class="code-key">"model"</span>: <span class="code-str">"ollama/kimi-k2.5:cloud"</span>,
-      <span class="code-key">"api_base"</span>: <span class="code-str">"http://127.0.0.1:11434/v1"</span>,
-      <span class="code-key">"api_key"</span>: <span class="code-str">"ollama"</span>
+      <span class="code-key">"model_name"</span>: <span class="code-str">"deepseek-chat"</span>,
+      <span class="code-key">"model"</span>: <span class="code-str">"deepseek/deepseek-chat"</span>,
+      <span class="code-key">"api_base"</span>: <span class="code-str">"https://api.deepseek.com/v1"</span>,
+      <span class="code-key">"api_key"</span>: <span class="code-str">"sk-f338...aec0a"</span>
     }
   ],
   <span class="code-key">"channels"</span>: {
@@ -595,7 +614,7 @@ nano ~/.picoclaw/config.json</code></pre>
 
       <div class="step">
         <div class="step-header">
-          <div class="step-number">06</div>
+          <div class="step-number">07</div>
           <div class="step-info">
             <h3>Launch PicoClaw</h3>
             <p>Start the gateway process to bring your Telegram bot online.</p>

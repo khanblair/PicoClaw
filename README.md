@@ -1,70 +1,86 @@
-# 🦞 Run PicoClaw on phone 🦞
-![logo](https://github.com/user-attachments/assets/4c390fe2-53a0-4ecd-b39d-cf6c6cee76ee)
+# 🦞 PicoClaw Mobile 🦞
 
-PicoClaw is an ultra-lightweight, open-source AI agent framework designed to run on resource-constrained hardware (like $10 RISC-V boards or old Android phones). It is a Go-native, "bare-metal" alternative to heavier frameworks like OpenClaw.
+PicoClaw is an ultra-lightweight, open-source AI agent framework designed to run on resource-constrained hardware, such as $10 RISC-V boards or old Android phones. It is a Go-native, "bare-metal" alternative to heavyweight frameworks.
 
-# Run these commands inside tetmux.
+This repository is optimized for **One-Click Mobile Deployment** with pre-integrated **DeepSeek** support.
 
-## update packages and intall ubuntu
-If you haven't installed Ubuntu yet, use proot-distro:
-```
-pkg update && pkg upgrade -y
-pkg install proot-distro -y
-proot-distro install ubuntu
-proot-distro login ubuntu
-```
-## 2. Prepare the Ubuntu Environment
-Once you are inside the Ubuntu shell (it will say root@localhost), install the basic tools:
-```
-apt update && apt upgrade -y
-apt install wget tar nano ca-certificates -y
-```
-## 3. Download and Setup PicoClaw
-Now, download the ARM64 version of PicoClaw:
-```
-wget https://github.com/sipeed/picoclaw/releases/download/v0.2.2/picoclaw_Linux_arm64.tar.gz
+---
 
-tar -xzvf picoclaw_Linux_arm64.tar.gz
+## ⚡ Quick Start (Android / Termux)
 
-chmod +x picoclaw
-mv picoclaw /usr/local/bin/
+Run the following command inside Termux to automatically set up the Ubuntu environment, install PicoClaw, and configure DeepSeek:
+
+```bash
+curl -sL https://raw.githubusercontent.com/khanblair/PicoClaw/feature/one-click-setup-deepseek/setup.sh | bash
 ```
-## 4. Create your Config File
-Ubuntu uses the /root/ directory as home. Create the config folder and file:
+
+### What happens during setup?
+1.  **Environment Check**: Installs `proot-distro` and `ubuntu` if not already present.
+2.  **Toolchain Setup**: Configures the Ubuntu environment with necessary tools (`wget`, `curl`, etc.).
+3.  **PicoClaw Installation**: Fetches the latest ARM64 binary and installs it to `/usr/local/bin`.
+4.  **Auto-Configuration**: Generates your `config.json` with **DeepSeek** as the default provider.
+
+---
+
+## 🛠 Manual Configuration
+
+If you prefer to configure PicoClaw manually or use a different model provider, you can edit the configuration file:
+
+```bash
+nano ~/.picoclaw/config.json
 ```
-mkdir -p ~/.picoclaw
-```
-## 5. Paste this config and Replace YOUR_TELEGRAM_TOKEN_HERE and ID  with your Bot token and ID (you can use your preffered ollama model):
-```
-cat <<EOF > ~/.picoclaw/config.json
+
+### DeepSeek Configuration (Default)
+The automated setup uses the following configuration for DeepSeek:
+
+```json
 {
   "agents": {
     "defaults": {
       "workspace": "/root/.picoclaw/workspace",
-      "model": "my-local-model"
+      "model": "deepseek-chat"
     }
   },
   "model_list": [
     {
-      "model_name": "my-local-model",
-      "model": "ollama/kimi-k2.5:cloud", 
-      "api_base": "http://127.0.0.1:11434/v1",
-      "api_key": "ollama"
+      "model_name": "deepseek-chat",
+      "model": "deepseek/deepseek-chat", 
+      "api_base": "https://api.deepseek.com/v1",
+      "api_key": "YOUR_DEEPSEEK_KEY"
     }
   ],
   "channels": {
     "telegram": {
       "enabled": true,
-      "token": "YOUR_TELEGRAM_TOKEN_HERE",
-      "allow_from": [TELEGRAM_ID_HERE]
+      "token": "YOUR_TELEGRAM_TOKEN",
+      "allow_from": [YOUR_TELEGRAM_ID]
     }
   }
 }
-EOF
 ```
-## 6. Run PicoClaw
 
-```
+---
+
+## 🚀 Running PicoClaw
+
+Once setup is complete, simply start the gateway to bring your agent online:
+
+```bash
 picoclaw gateway
 ```
 
+For debugging or verbose logs, use:
+```bash
+picoclaw gateway -d
+```
+
+---
+
+## 📂 Project Structure
+- `setup.sh`: Automated installation script.
+- `index.html`: Interactive web-based deployment guide.
+- `config.json`: (Generated) Core configuration for agents and channels.
+
+---
+
+Built with ❤️ for the mobile AI community.
