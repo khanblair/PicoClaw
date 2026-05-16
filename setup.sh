@@ -4,19 +4,23 @@
 # Optimized for Android (Termux)
 # Pre-integrated with DeepSeek
 
-# 1. Termux Side Setup
-if [ ! -f "/etc/debian_version" ]; then
+# 1. Environment Detection (Termux vs Ubuntu)
+# Check if we are in Termux (not inside a proot container)
+if [ -d "/data/data/com.termux/files/usr" ] && [ -z "$PROOT_DISTRO_NAME" ]; then
     echo "--- Phase 1: Termux Environment Setup ---"
     pkg update && pkg upgrade -y
     pkg install proot-distro git curl -y
     
-    if ! proot-distro list | grep -q "ubuntu.*installed"; then
-        echo "Installing Ubuntu via proot-distro..."
+    # Improved check: See if ubuntu is already installed
+    if proot-distro list | grep -i "ubuntu" | grep -q "installed"; then
+        echo "[*] Ubuntu is already installed. Skipping installation."
+    else
+        echo "[*] Installing Ubuntu via proot-distro..."
         proot-distro install ubuntu
     fi
     
     echo "--- Transitioning to Ubuntu Phase ---"
-    # Execute this script inside Ubuntu
+    # Execute this script inside Ubuntu container
     proot-distro login ubuntu -- bash -c "$(cat $0)"
     exit 0
 fi
