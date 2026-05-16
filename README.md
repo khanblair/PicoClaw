@@ -38,19 +38,19 @@ The automated setup uses the following configuration for DeepSeek:
   "agents": {
     "defaults": {
       "workspace": "/root/.picoclaw/workspace",
-      "model": "deepseek-pro"
+      "model": "pro"
     }
   },
   "model_list": [
     {
-      "model_name": "deepseek-pro",
-      "model": "deepseek/deepseek-chat", 
+      "model_name": "pro",
+      "model": "deepseek-v4-pro", 
       "api_base": "https://api.deepseek.com/v1",
       "api_key": "sk-f338...aec0a"
     },
     {
-      "model_name": "deepseek-flash",
-      "model": "deepseek/deepseek-chat", 
+      "model_name": "flash",
+      "model": "deepseek-v4-flash", 
       "api_base": "https://api.deepseek.com/v1",
       "api_key": "sk-f338...aec0a"
     }
